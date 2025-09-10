@@ -20,8 +20,7 @@ class TestEmailSender:
     def __init__(self):
         # Email configuration from environment variables
         self.smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-        smtp_port_str = os.getenv('SMTP_PORT', '587')
-        self.smtp_port = int(smtp_port_str) if smtp_port_str else 587
+        self.smtp_port = int(os.getenv('SMTP_PORT', '587'))
         self.sender_email = os.getenv('SENDER_EMAIL')
         self.sender_password = os.getenv('SENDER_PASSWORD')
         
@@ -88,18 +87,37 @@ YouTube Family Plan Manager
         current_date = datetime.now()
         logging.info(f"Sending TEST email for {current_date.strftime('%B %Y')}")
         logging.info(f"Test recipient: {self.test_recipient}")
+        logging.info(f"SMTP Server: {self.smtp_server}:{self.smtp_port}")
+        logging.info(f"Sender Email: {self.sender_email}")
         
         try:
             message = self.create_test_email_message()
             
-            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-                server.starttls()
-                server.login(self.sender_email, self.sender_password)
-                server.send_message(message)
+            # Create SMTP connection with more detailed error handling
+            server = smtplib.SMTP(self.smtp_server, self.smtp_port)
+            logging.info("SMTP connection established")
             
+            server.set_debuglevel(1)  # Enable SMTP debug output
+            server.starttls()
+            logging.info("TLS started")
+            
+            server.login(self.sender_email, self.sender_password)
+            logging.info("Login successful")
+            
+            server.send_message(message)
+            logging.info("Message sent")
+            
+            server.quit()
             logging.info(f"TEST email sent successfully to {self.test_recipient}")
             return True
             
+        except smtplib.SMTPAuthenticationError as e:
+            logging.error(f"SMTP Authentication failed: {str(e)}")
+            logging.error("Make sure you're using a Gmail App Password, not your regular password")
+            return False
+        except smtplib.SMTPException as e:
+            logging.error(f"SMTP error occurred: {str(e)}")
+            return False
         except Exception as e:
             logging.error(f"Failed to send TEST email to {self.test_recipient}: {str(e)}")
             return False
