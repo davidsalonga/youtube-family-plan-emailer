@@ -3,7 +3,7 @@ name: Test Email Send
 on:
   workflow_dispatch:  # Manual trigger
   schedule:
-    - cron: '50 8 * * *'  # 4:50 PM Philippine Time (UTC+8 = 8:50 UTC)
+    - cron: '57 8 * * *'  # 4:57 PM Philippine Time (UTC+8 = 8:57 UTC)
 
 jobs:
   test-email:
