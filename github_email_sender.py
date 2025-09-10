@@ -21,7 +21,8 @@ class GitHubEmailSender:
     def __init__(self):
         # Email configuration from environment variables (GitHub Secrets)
         self.smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-        self.smtp_port = int(os.getenv('SMTP_PORT', '587'))
+        smtp_port_str = os.getenv('SMTP_PORT', '587')
+        self.smtp_port = int(smtp_port_str) if smtp_port_str else 587
         self.sender_email = os.getenv('SENDER_EMAIL')
         self.sender_password = os.getenv('SENDER_PASSWORD')
         
