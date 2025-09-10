@@ -48,14 +48,7 @@ jobs:
         recipient = 'salongadaviid@gmail.com'
         
         subject = '✅ Test Email Workflow Completed Successfully'
-        body = f'''Success! 
-        
-Test emails have been sent successfully.
-
-Recipients: Azor Lanac and David Salonga
-
-Sent from GitHub Actions (Test Workflow)
-{datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}'''
+        body = 'Success! Test emails have been sent successfully. Recipients: Azor Lanac and David Salonga. Sent from GitHub Actions (Test Workflow) ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')
         
         msg = MIMEText(body)
         msg['Subject'] = subject
