@@ -61,7 +61,8 @@ class GitHubEmailSender:
         message["To"] = recipient
         message["Subject"] = self.subject.format(date=current_date)
         
-        body = f"""Hello,
+        # Plain text version
+        text_body = f"""Hello,
 
 This is your monthly reminder for the YouTube Family Plan payment due on the 20th of {current_date}.
 
@@ -73,8 +74,30 @@ Thank you!
 
 Best regards,
 YouTube Family Plan Manager"""
+
+        # HTML version with proper formatting
+        html_body = f"""
+<html>
+<body style="font-family: Arial, sans-serif;">
+    <p>Hello,</p>
+    
+    <p>This is your monthly reminder for the YouTube Family Plan payment due on the 20th of {current_date}.</p>
+    
+    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; font-family: monospace;">
+        <pre style="margin: 0; font-family: monospace; white-space: pre-wrap;">{breakdown_content}</pre>
+    </div>
+    
+    <p>Please send your share of <strong>₱94.75</strong> to complete the monthly payment.</p>
+    
+    <p>Thank you!</p>
+    
+    <p>Best regards,<br>
+    YouTube Family Plan Manager</p>
+</body>
+</html>"""
         
-        message.attach(MIMEText(body, "plain"))
+        message.attach(MIMEText(text_body, "plain"))
+        message.attach(MIMEText(html_body, "html"))
         
         return message
     
