@@ -27,6 +27,8 @@ class GitHubEmailSender:
         
         # YouTube Family Plan recipients
         self.recipients = [
+            'sophiaypa@gmail.com',          # Sophia Aguilar
+            'jeff.rosarito@gmail.com',      # Jeffrey Rosarito
             'azorlanac@gmail.com',          # Azor Lanac
             'salongadaviid@gmail.com'       # David Salonga
         ]
