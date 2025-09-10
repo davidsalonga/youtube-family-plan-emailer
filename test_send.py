@@ -24,8 +24,11 @@ class TestEmailSender:
         self.sender_email = os.getenv('SENDER_EMAIL')
         self.sender_password = os.getenv('SENDER_PASSWORD')
         
-        # Test recipient - only your email
-        self.test_recipient = 'salongadaviid@gmail.com'
+        # Test recipients
+        self.test_recipients = [
+            'azorlanac@gmail.com',      # Azor Lanac
+            'salongadaviid@gmail.com'   # David Salonga
+        ]
         
         
         # Email content
@@ -53,15 +56,17 @@ GCash
 Francis David Salonga
 📱 0998 850 2851"""
     
-    def create_test_email_message(self):
-        """Create test email message"""
+    def create_test_email_message(self, recipient):
+        """Create test email message for a recipient"""
         current_date = datetime.now().strftime("%B %Y")
         breakdown_content = self.get_breakdown_content()
         
         message = MIMEMultipart()
-        message["From"] = self.sender_email
-        message["To"] = self.test_recipient
+        from email.utils import formataddr
+        message["From"] = formataddr(("David Salonga", self.sender_email))
+        message["To"] = recipient
         message["Subject"] = self.subject.format(date=current_date)
+        message["Reply-To"] = f"David Salonga <{self.sender_email}>"
         
         # HTML version with proper formatting
         html_body = f"""
@@ -92,8 +97,8 @@ Francis David Salonga
         
         return message
     
-    def send_test_email(self):
-        """Send test email to salongadaviid@gmail.com"""
+    def send_test_emails(self):
+        """Send test emails to test recipients"""
         # Check if email credentials are available
         if not self.sender_email or not self.sender_password:
             logging.error("Email credentials not found in environment variables")
@@ -101,31 +106,37 @@ Francis David Salonga
             return False
         
         current_date = datetime.now()
-        logging.info(f"Sending TEST email for {current_date.strftime('%B %Y')}")
-        logging.info(f"Test recipient: {self.test_recipient}")
+        logging.info(f"Sending TEST emails for {current_date.strftime('%B %Y')}")
+        logging.info(f"Test recipients: {self.test_recipients}")
         logging.info(f"SMTP Server: {self.smtp_server}:{self.smtp_port}")
         logging.info(f"Sender Email: {self.sender_email}")
         
+        success_count = 0
+        
         try:
-            message = self.create_test_email_message()
-            
-            # Create SMTP connection with more detailed error handling
+            # Create SMTP connection once for all emails
             server = smtplib.SMTP(self.smtp_server, self.smtp_port)
             logging.info("SMTP connection established")
             
-            server.set_debuglevel(1)  # Enable SMTP debug output
             server.starttls()
             logging.info("TLS started")
             
             server.login(self.sender_email, self.sender_password)
             logging.info("Login successful")
             
-            server.send_message(message)
-            logging.info("Message sent")
+            # Send to each recipient
+            for recipient in self.test_recipients:
+                try:
+                    message = self.create_test_email_message(recipient)
+                    server.send_message(message)
+                    logging.info(f"TEST email sent successfully to {recipient}")
+                    success_count += 1
+                except Exception as e:
+                    logging.error(f"Failed to send TEST email to {recipient}: {str(e)}")
             
             server.quit()
-            logging.info(f"TEST email sent successfully to {self.test_recipient}")
-            return True
+            logging.info(f"Email send complete. Successfully sent to {success_count}/{len(self.test_recipients)} recipients")
+            return success_count == len(self.test_recipients)
             
         except smtplib.SMTPAuthenticationError as e:
             logging.error(f"SMTP Authentication failed: {str(e)}")
@@ -135,24 +146,26 @@ Francis David Salonga
             logging.error(f"SMTP error occurred: {str(e)}")
             return False
         except Exception as e:
-            logging.error(f"Failed to send TEST email to {self.test_recipient}: {str(e)}")
+            logging.error(f"Failed to send TEST emails: {str(e)}")
             return False
 
 def main():
     """Main function to run the test email sender"""
     print("=== YouTube Family Plan Email Test ===")
-    print("This will send a TEST email ONLY to: salongadaviid@gmail.com")
+    print("This will send TEST emails to:")
+    print("- azorlanac@gmail.com")
+    print("- salongadaviid@gmail.com")
     print("Running in GitHub Actions - no confirmation needed")
     print()
     
     sender = TestEmailSender()
     
-    # Send test email
-    success = sender.send_test_email()
+    # Send test emails
+    success = sender.send_test_emails()
     
     if success:
-        print("\n✅ Test email sent successfully!")
-        print("Check your inbox at salongadaviid@gmail.com")
+        print("\n✅ Test emails sent successfully!")
+        print("Check inboxes at both test recipients")
     else:
         print("\n❌ Failed to send test email")
         print("Please check your email credentials and connection")

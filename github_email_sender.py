@@ -65,9 +65,11 @@ Francis David Salonga
         breakdown_content = self.get_breakdown_content()
         
         message = MIMEMultipart()
-        message["From"] = self.sender_email
+        from email.utils import formataddr
+        message["From"] = formataddr(("David Salonga", self.sender_email))
         message["To"] = recipient
         message["Subject"] = self.subject.format(date=current_date)
+        message["Reply-To"] = f"YouTube Family Plan Manager <{self.sender_email}>"
         
         # HTML version with proper formatting
         html_body = f"""
@@ -123,10 +125,16 @@ Francis David Salonga
         success_count = 0
         total_recipients = len(self.recipients)
         
+        logging.info(f"Recipients to send to: {self.recipients}")
+        
         for recipient in self.recipients:
+            logging.info(f"Preparing email for: {recipient}")
             message = self.create_email_message(recipient)
             if self.send_email(recipient, message):
                 success_count += 1
+                logging.info(f"✅ Successfully sent to: {recipient}")
+            else:
+                logging.error(f"❌ Failed to send to: {recipient}")
         
         logging.info(f"Email send complete. Successfully sent to {success_count}/{total_recipients} recipients")
         return success_count == total_recipients
