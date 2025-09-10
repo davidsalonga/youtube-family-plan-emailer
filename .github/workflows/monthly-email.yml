@@ -1,10 +1,6 @@
 name: Monthly YouTube Family Plan Email
 
 on:
-  schedule:
-    # Runs at 9:00 AM Philippine Time (1:00 AM UTC) on the 20th day of every month
-    - cron: '0 1 20 * *'
-  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
