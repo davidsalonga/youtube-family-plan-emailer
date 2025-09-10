@@ -1,5 +1,7 @@
-# For local version with continuous scheduling
-schedule==1.2.0
-
 # No additional requirements needed for GitHub Actions version
-# (uses built-in smtplib, email, datetime, os, logging)
+# All dependencies are built-in Python modules:
+# - smtplib (email sending)
+# - email.mime (email formatting) 
+# - datetime (date handling)
+# - os (environment variables)
+# - logging (output logging)
