@@ -77,7 +77,7 @@ Francis David Salonga
         <pre style="margin: 0; font-family: monospace; white-space: pre-wrap;">{breakdown_content}</pre>
     </div>
     
-    <p>Please send your share of <strong>₱94.75</strong> to complete the monthly payment.</p>
+    <p><strong>After sending payment, kindly send a screenshot via reply to this email or through messenger as confirmation.</strong></p>
     
     <p>Thank you!</p>
     
