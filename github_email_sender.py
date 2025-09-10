@@ -69,20 +69,6 @@ Francis David Salonga
         message["To"] = recipient
         message["Subject"] = self.subject.format(date=current_date)
         
-        # Plain text version
-        text_body = f"""Hello,
-
-This is your monthly reminder for the YouTube Family Plan payment due on the 20th of {current_date}.
-
-{breakdown_content}
-
-Please send your share of ₱94.75 to complete the monthly payment.
-
-Thank you!
-
-Best regards,
-YouTube Family Plan Manager"""
-
         # HTML version with proper formatting
         html_body = f"""
 <html>
@@ -104,7 +90,6 @@ YouTube Family Plan Manager"""
 </body>
 </html>"""
         
-        message.attach(MIMEText(text_body, "plain"))
         message.attach(MIMEText(html_body, "html"))
         
         return message
