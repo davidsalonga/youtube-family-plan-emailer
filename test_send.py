@@ -27,28 +27,36 @@ class TestEmailSender:
         # Test recipient - only your email
         self.test_recipient = 'salongadaviid@gmail.com'
         
-        # Path to the YouTube Family Plan breakdown file
-        self.breakdown_file = 'YouTube Family Plan Breakdown.txt'
         
         # Email content
         self.subject = "TEST - YouTube Family Plan - Monthly Payment Due ({date})"
     
-    def read_breakdown_content(self):
-        """Read the YouTube Family Plan breakdown from file"""
-        try:
-            with open(self.breakdown_file, 'r', encoding='utf-8') as file:
-                return file.read()
-        except FileNotFoundError:
-            logging.error(f"Breakdown file '{self.breakdown_file}' not found")
-            return "YouTube Family Plan Breakdown file not found."
-        except Exception as e:
-            logging.error(f"Error reading breakdown file: {str(e)}")
-            return "Error reading YouTube Family Plan breakdown."
+    def get_breakdown_content(self):
+        """Get the formatted YouTube Family Plan breakdown"""
+        return """📋 Monthly Expense Breakdown
+
+Total Monthly Cost: ₱379
+Number of Members: 4
+Per Person Share: ₱94.75
+
+👥 Members & Shares
+---------------------------------
+Name                 Share (₱)
+---------------------------------
+Sophia Aguilar       94.75
+Jeffrey Rosarito     94.75
+Azor Lanac           94.75
+David (Dab) Salonga  94.75
+
+💳 Payment Method
+GCash
+Francis David Salonga
+📱 0998 850 2851"""
     
     def create_test_email_message(self):
         """Create test email message"""
         current_date = datetime.now().strftime("%B %Y")
-        breakdown_content = self.read_breakdown_content()
+        breakdown_content = self.get_breakdown_content()
         
         message = MIMEMultipart()
         message["From"] = self.sender_email
