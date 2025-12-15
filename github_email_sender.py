@@ -41,7 +41,7 @@ class GitHubEmailSender:
         return """📋 Monthly Expense Breakdown
 
 Total Monthly Cost: ₱379
-Number of Members: 4
+Number of Members: 3
 Per Person Share: ₱94.75
 
 👥 Members & Shares
