@@ -28,7 +28,6 @@ class GitHubEmailSender:
         # YouTube Family Plan recipients
         self.recipients = [
             'sophiaypa@gmail.com',          # Sophia Aguilar
-            'jeff.rosarito@gmail.com',      # Jeffrey Rosarito
             'azorlanac@gmail.com',          # Azor Lanac
             'salongadaviid@gmail.com'       # David Salonga
         ]
@@ -50,7 +49,6 @@ Per Person Share: ₱94.75
 Name                 Share (₱)
 ---------------------------------
 Sophia Aguilar       94.75
-Jeffrey Rosarito     94.75
 Azor Lanac           94.75
 David (Dab) Salonga  94.75
 
