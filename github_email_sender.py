@@ -29,7 +29,8 @@ class GitHubEmailSender:
         self.recipients = [
             'sophiaypa@gmail.com',          # Sophia Aguilar
             'azorlanac@gmail.com',          # Azor Lanac
-            'salongadaviid@gmail.com'       # David Salonga
+            'salongadaviid@gmail.com',       # David Salonga
+            'jagabriel031@gmail.com'       # Coach John
         ]
         
         
@@ -41,7 +42,7 @@ class GitHubEmailSender:
         return """📋 Monthly Expense Breakdown
 
 Total Monthly Cost: ₱379
-Number of Members: 3
+Number of Members: 4
 Per Person Share: ₱94.75
 
 👥 Members & Shares
@@ -51,6 +52,7 @@ Name                 Share (₱)
 Sophia Aguilar       94.75
 Azor Lanac           94.75
 David (Dab) Salonga  94.75
+Coach John           94.75
 
 💳 Payment Method
 GCash
