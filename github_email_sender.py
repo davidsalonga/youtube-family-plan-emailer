@@ -28,9 +28,9 @@ class GitHubEmailSender:
         # YouTube Family Plan recipients
         self.recipients = [
             'sophiaypa@gmail.com',          # Sophia Aguilar
-            'azorlanac@gmail.com',          # Azor Lanac
             'salongadaviid@gmail.com',       # David Salonga
-            'jagabriel031@gmail.com'       # Coach John
+            'jagabriel031@gmail.com',       # Coach John
+            'rocalansingin@gmail.com'         # Rollen Calansingin
         ]
         
         
@@ -38,26 +38,28 @@ class GitHubEmailSender:
         self.subject = "YouTube Family Plan - Monthly Payment Due ({date})"
     
     def get_breakdown_content(self):
-        """Get the formatted YouTube Family Plan breakdown"""
-        return """📋 Monthly Expense Breakdown
+    """Get the formatted YouTube Family Plan breakdown"""
+    return """📋 Monthly Plan Details
 
 Total Monthly Cost: ₱379
-Number of Members: 4
-Per Person Share: ₱94.75
+Per Person Share: ₱95
 
-👥 Members & Shares
+👥 Members
 ---------------------------------
-Name                 Share (₱)
----------------------------------
-Sophia Aguilar       94.75
-Azor Lanac           94.75
-David (Dab) Salonga  94.75
-Coach John           94.75
+Sophia
+David
+Coach John
+Rollen
+
 
 💳 Payment Method
 GCash
 Francis David Salonga
-📱 0998 850 2851"""
+📱 0998 850 2851
+
+💡 Note:
+Individual YouTube Premium costs around ₱189/month.
+This family plan keeps your cost lower at just ₱95 👍"""
     
     def create_email_message(self, recipient):
         """Create email message for a recipient"""
@@ -88,7 +90,7 @@ Francis David Salonga
     <p>Thank you!</p>
     
     <p>Best regards,<br>
-    YouTube Family Plan Manager</p>
+    Dabs</p>
 </body>
 </html>"""
         
