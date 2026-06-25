@@ -27,19 +27,18 @@ class GitHubEmailSender:
         
         # YouTube Family Plan recipients
         self.recipients = [
-            'sophiaypa@gmail.com',          # Sophia Aguilar
-            'salongadaviid@gmail.com',       # David Salonga
-            'jagabriel031@gmail.com',       # Coach John
-            'rocalansingin@gmail.com'         # Rollen Calansingin
+            'sophiaypa@gmail.com',         # Sophia Aguilar
+            'salongadaviid@gmail.com',     # David Salonga
+            'jagabriel031@gmail.com',      # Coach John
+            'rocalansingin@gmail.com'      # Rollen Calansingin
         ]
-        
         
         # Email content
         self.subject = "YouTube Family Plan - Monthly Payment Due ({date})"
     
     def get_breakdown_content(self):
-    """Get the formatted YouTube Family Plan breakdown"""
-    return """📋 Monthly Plan Details
+        """Get the formatted YouTube Family Plan breakdown"""
+        return """📋 Monthly Plan Details
 
 Total Monthly Cost: ₱379
 Per Person Share: ₱95
@@ -145,11 +144,10 @@ def main():
     """Main function to run the email sender"""
     sender = GitHubEmailSender()
     
-    # Send emails (GitHub Actions will handle the scheduling)
     success = sender.send_monthly_emails()
     
     if not success:
-        exit(1)  # Exit with error code if sending failed
+        exit(1)
 
 if __name__ == "__main__":
     main()
