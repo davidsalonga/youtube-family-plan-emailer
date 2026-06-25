@@ -33,27 +33,29 @@ class TestEmailSender:
         # Email content
         self.subject = "TEST - YouTube Family Plan - Monthly Payment Due ({date})"
     
-    def get_breakdown_content(self):
-        """Get the formatted YouTube Family Plan breakdown"""
-        return """📋 Monthly Expense Breakdown
+     def get_breakdown_content(self):
+    """Get the formatted YouTube Family Plan breakdown"""
+    return """📋 Monthly Plan Details
 
 Total Monthly Cost: ₱379
-Number of Members: 4
-Per Person Share: ₱94.75
+Per Person Share: ₱95
 
-👥 Members & Shares
+👥 Members
 ---------------------------------
-Name                 Share (₱)
----------------------------------
-Sophia Aguilar       94.75
-Jeffrey Rosarito     94.75
-Azor Lanac           94.75
-David (Dab) Salonga  94.75
+Sophia
+David
+Coach John
+Rollen
+
 
 💳 Payment Method
 GCash
 Francis David Salonga
-📱 0998 850 2851"""
+📱 0998 850 2851
+
+💡 Note:
+Individual YouTube Premium costs around ₱189/month.
+This family plan keeps your cost lower at just ₱95 👍"""
     
     def create_test_email_message(self, recipient):
         """Create test email message for a recipient"""
