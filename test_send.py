@@ -26,7 +26,6 @@ class TestEmailSender:
         
         # Test recipients
         self.test_recipients = [
-            'azorlanac@gmail.com',      # Azor Lanac
             'salongadaviid@gmail.com'   # David Salonga
         ]
         
